@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RegionWalksAPI.Models.Domain;
 
-namespace RegionWalksAPI.Models.Domain
+namespace RegionWalksAPI.Models.Dto
 {
-    public class Walk
+    public class WalksDto
     {
         public Guid Id { get; set; }
         public string? Name{ get; set; }
@@ -14,7 +15,7 @@ namespace RegionWalksAPI.Models.Domain
         public Guid WalkDifficultyId { get; set; }
 
         //Navigation properties
-        public Region Region { get; set; }
-        public WalkDifficulty WalkDifficulty { get; set; }
+        public Region? Region { get; set; }
+        public WalkDifficulty? WalkDifficulty { get; set; }
     }
 }

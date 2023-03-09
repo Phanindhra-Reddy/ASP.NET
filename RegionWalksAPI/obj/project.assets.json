@@ -7437,11 +7437,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\phanindhra.reddy\\Documents\\AspNet\\RegionWalksAPI\\RegionWalksAPI.csproj",
+      "projectUniqueName": "C:\\Users\\phanindhra.reddy\\Documents\\ASP.NET\\RegionWalksAPI\\RegionWalksAPI.csproj",
       "projectName": "RegionWalksAPI",
-      "projectPath": "c:\\Users\\phanindhra.reddy\\Documents\\AspNet\\RegionWalksAPI\\RegionWalksAPI.csproj",
+      "projectPath": "C:\\Users\\phanindhra.reddy\\Documents\\ASP.NET\\RegionWalksAPI\\RegionWalksAPI.csproj",
       "packagesPath": "C:\\Users\\phanindhra.reddy\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\phanindhra.reddy\\Documents\\AspNet\\RegionWalksAPI\\obj\\",
+      "outputPath": "C:\\Users\\phanindhra.reddy\\Documents\\ASP.NET\\RegionWalksAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\phanindhra.reddy\\AppData\\Roaming\\NuGet\\NuGet.Config"
