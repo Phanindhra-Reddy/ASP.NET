@@ -99,7 +99,7 @@ namespace RegionWalksAPI.Controllers
         }
     
         [HttpPost]
-        public async Task<IActionResult> AddWalkAsync([FromBody] AddWalkRequest addWalkRequest)
+        public async Task<IActionResult> AddWalkAsync([FromBody] AddWalkRequest addWalkRequest) 
         {
             //convert dto object to repository
             var walk = new Walk()
@@ -125,6 +125,38 @@ namespace RegionWalksAPI.Controllers
             return CreatedAtAction(nameof(GetWalkAsync),new{id = walkDto.Id},walkDto);
             //return Ok(walkDto);
         }
-    
+
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateWalkAsync([FromRoute] Guid id,[FromBody] UpdateWalkRequest updateWalkRequest)
+        {
+            //convert dto to domain object
+            var walkDomain = new Walk
+            {
+                Length = updateWalkRequest.Length,
+                Name = updateWalkRequest.Name,
+                RegionId = updateWalkRequest.RegionId,
+                WalkDifficultyId = updateWalkRequest.WalkDifficultyId
+            };
+            //pass details to repository
+            walkDomain = await walkRepository.UpdateAsync(id,walkDomain);
+            //handle null
+            if(walkDomain == null)
+            {
+                return NotFound();
+            }
+            //convert back to dto
+            var walkDTO = new Walk
+            {
+                Id = walkDomain.Id,
+                Length = walkDomain.Length,
+                Name = walkDomain.Name,
+                RegionId = walkDomain.RegionId,
+                WalkDifficultyId = walkDomain.WalkDifficultyId
+            };
+            //return response
+            return Ok(walkDTO);
+
+        }
     }
 }
