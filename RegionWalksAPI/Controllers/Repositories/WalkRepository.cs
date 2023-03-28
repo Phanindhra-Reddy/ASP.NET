@@ -54,5 +54,16 @@ namespace RegionWalksAPI.Controllers.Repositories
             }
             return null;
         }
+
+        public async Task<Walk> DeleteAsync(Guid id)
+        {
+            var walk = await GetAsync(id);
+            if(walk == null){
+                return null;
+            }
+            nZWalksDbContext.Walks.Remove(walk);
+            await nZWalksDbContext.SaveChangesAsync();
+            return walk;
+        }
     }
 }
