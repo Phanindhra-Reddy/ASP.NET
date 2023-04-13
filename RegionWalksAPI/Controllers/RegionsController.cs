@@ -64,7 +64,7 @@ namespace RegionWalksAPI.Controllers
                 Lat = region.Lat,
                 Long = region.Long,
                 Population = region.Population,
-                Walks = region.Walks
+                // Walks = region.Walks
             };
             regionsDto.Add(regionDto);
 
@@ -101,6 +101,11 @@ namespace RegionWalksAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRegionAsync(AddRegionRequest addRegionRequest)
         {
+            if(!validateAddRegionAsync(addRegionRequest))
+            {
+                return BadRequest(ModelState);
+            }
+            
             //Request to Domain Model
             var region = new Region()
             {
@@ -191,5 +196,51 @@ namespace RegionWalksAPI.Controllers
             return Ok(regionDTO);
 
         }
+
+        private bool validateAddRegionAsync(AddRegionRequest addRegionRequest)
+        {
+            if(addRegionRequest == null)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest),
+                $"Region Data is not sufficient");
+                return false;
+            }
+            if(string.IsNullOrWhiteSpace(addRegionRequest.Code))
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Code),
+                 $"{nameof(addRegionRequest.Code)} cannot be null oe empty or white space.");
+            }
+            if(string.IsNullOrWhiteSpace(addRegionRequest.Name))
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Name),
+                 $"{nameof(addRegionRequest.Name)} cannot be null oe empty or white space.");
+            }
+            if(addRegionRequest.Area <= 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Area),
+                $"{nameof(addRegionRequest.Area)} cannot be less than or equal to zero!");
+            }
+            if(addRegionRequest.Lat <= 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Lat),
+                $"{nameof(addRegionRequest.Lat)} cannot be less than or equal to zero!");
+            }
+            if(addRegionRequest.Long <= 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Long),
+                $"{nameof(addRegionRequest.Long)} cannot be less than or equal to zero!");
+            }
+            if(addRegionRequest.Population < 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Population),
+                $"{nameof(addRegionRequest.Population)} cannot be less than zero!");
+            }
+            if(ModelState.ErrorCount > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        
     }
 } 
